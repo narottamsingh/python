@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: "RP Flask REST API"
+  description: "An API about people and notes"
+  version: "1.0.0"
+
+
+servers:
+  - url: "/api"  
+
+# ...
+
+paths:
+  /userapi/{lname}:
+    get:
+      operationId: "userapi.getuser"
+      tags:
+        - "Hello"
+      summary: "Read the list of people"
+      parameters:
+        - $ref: "#/components/parameters/lname"
+      responses:
+        "200":
+          description: "Successfully read people list"  
+  /userapi:        
+    get:
+      operationId: "userapi.getAllUser"
+      tags:
+        - "Hello"
+      summary: "Read the list of people"
+      responses:
+        "200":
+          description: "Successfully read people list"  
+
+
+
+components:
+  parameters:
+    lname:
+      name: "lname"
+      description: "Last name of the person to get"
+      in: path
+      required: True
+      schema:
+        type: "string"
+  schemas:
+    userapi:
+      type: "object"
+      required:
+        - lname
+      properties:
+        lname:
+          type: "string"
